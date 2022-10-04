@@ -21,7 +21,7 @@ class Rectangle:
 
 
 figure = Rectangle()
-figure.set_var(10.0, 22.3)
+figure.set_var(10.0, 19.3)
 print('Area: ', figure.area(), '| Perimeter: ', figure.perimeter())
 
 
