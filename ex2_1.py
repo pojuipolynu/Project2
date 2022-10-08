@@ -1,30 +1,44 @@
 class Rectangle:
     def __init__(self, length=1, width=1):
-        self.length = length
-        self.width = width
-
-    def get_var(self):
-        return self.length, self.width
-
-    def set_var(self, a, b):
-        if isinstance(a, float) and (0.0 < a < 20.0) and isinstance(b, float) and (0.0 < b < 20.0):
-            self.length = a
-            self.width = b
+        if not isinstance(length, float) and not isinstance(length, int) or not 0 < length < 20:
+            raise Exception('Your variables (or one of them) are invalid')
         else:
-            print('Your variables (or one of them) are invalid')
+            self.length = length
+        if not isinstance(width, float) and not isinstance(width, int) or not 0 < width < 20:
+            raise Exception('Your variables (or one of them) are invalid')
+        else:
+            self.width = width
+
+    def get_length(self):
+        return self.length
+
+    def get_width(self):
+        return self.width
 
     def perimeter(self):
-        return self.length + self.width
+        return self.length*2 + self.width*2
 
     def area(self):
         return self.length * self.width
 
+    def set_length(self, a):
+        if not isinstance(a, float) and not isinstance(a, int) or not 0 < a < 20:
+            raise Exception('Your variables (or one of them) are invalid')
+        else:
+            self.length = a
 
-figure = Rectangle()
-figure.set_var(10.0, 19.3)
+    def set_width(self, a):
+        if not isinstance(a, float) and not isinstance(a, int) or not 0 < a < 20:
+            raise Exception('Your variables (or one of them) are invalid')
+        else:
+            self.width = a
+
+
+figure = Rectangle(2, 12)
 print('Area: ', figure.area(), '| Perimeter: ', figure.perimeter())
-
-
+figure.set_length(13)
+figure.set_width(15)
+print('Area: ', figure.area(), '| Perimeter: ', figure.perimeter())
 
 
 
