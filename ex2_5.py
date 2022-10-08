@@ -7,8 +7,7 @@ class Student:
         self.average = 0
 
     def __str__(self):
-        return f'Student: {self.surname} {self.name[0]}\nRecord book number: {self.rbn}\nGrades: {self.grades} ' \
-               f'\nAverage score: {self.average}\n'
+        return f'Student: {self.surname} {self.name[0]}\nRecord book number: {self.rbn}\nGrades: {self.grades} '
 
 
 class Group:
@@ -32,7 +31,7 @@ class Group:
 
     def print_score(self):
         for x in self.high_grade():
-            print(x, '\nAverage score:' x.average, '\n')
+            print(x, '\nAverage score:', x.average, '\n')
 
 
 student1 = Student('Yulia', 'Ponomareva', '3905798684', (2, 4, 6, 1, 34, 6))
