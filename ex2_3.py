@@ -8,7 +8,7 @@ class Product:
         self.dimension = dimension
 
     def __str__(self):
-        return f'Product\nPrice: {self.price}\nDescription: {self.description}\nDimensions: {self.dimension}'
+        return f'\nProduct\nPrice: {self.price}\nDescription: {self.description}\nDimensions: {self.dimension}'
 
 
 class Customer:
