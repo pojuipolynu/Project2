@@ -32,7 +32,7 @@ class Group:
 
     def print_score(self):
         for x in self.high_grade():
-            print(x)
+            print(x, '\nAverage score:' x.average, '\n')
 
 
 student1 = Student('Yulia', 'Ponomareva', '3905798684', (2, 4, 6, 1, 34, 6))
