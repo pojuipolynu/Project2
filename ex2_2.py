@@ -3,30 +3,20 @@ import math
 
 class Rational:
     def __init__(self, numerator=1, denominator=1):
-        self.__numerator = numerator
-        self.__denominator = denominator
-        self.frac_sco()
-
-    def frac_sco(self):
-        if isinstance(self.__numerator, int) and isinstance(self.__denominator, int):
-            n = math.gcd(self.__denominator, self.__numerator)
-            self.__numerator = self.__numerator // n
-            self.__denominator = self.__denominator // n
+        if not isinstance(numerator, int):
+            raise Exception('Your numerator is invalid')
         else:
-            print('Your variables (or one of them) are invalid')
-
-    def print_drib(self):
-        if self.__denominator == 1:
-            fraction = self.__numerator
+            self.__numerator = numerator
+        if not isinstance(denominator, int) or denominator == 0:
+            raise Exception('Your denominator is invalid')
         else:
-            fraction = f'{self.__numerator}/{self.__denominator}'
-        return fraction
+            self.__denominator = denominator
 
-    def print_ddrib(self):
-        fraction = self.__numerator/self.__denominator
-        return fraction
+    def __str__(self):
+        n = math.gcd(self.__denominator, self.__numerator)
+        return f'Fraction: {self.__numerator//n}/{self.__denominator//n}' \
+               f'\nDecimal: {self.__numerator/self.__denominator}'
 
 
-fract = Rational(2, 4)
-print(fract.print_drib())
-print(fract.print_ddrib())
+fract = Rational(21, 49)
+print(fract.__str__())
