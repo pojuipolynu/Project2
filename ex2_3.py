@@ -1,8 +1,14 @@
 class Product:
-    def __init__(self, price=None, description=None, dimension=None):
-        self.price = price
+    def __init__(self, price=0, description=None, dimension=None):
+        if not isinstance(price, int) or price <= 0:
+            raise Exception('Your price is invalid')
+        else:
+            self.price = price
         self.description = description
         self.dimension = dimension
+
+    def __str__(self):
+        return f'Product\nPrice: {self.price}\nDescription: {self.description}\nDimensions: {self.dimension}'
 
 
 class Customer:
@@ -12,30 +18,45 @@ class Customer:
         self.patronymic = patronymic
         self.phone = phone
 
+    def __str__(self):
+        return f'Customer\nSurname and Initials: {self.surname} {self.name[0]}.{self.patronymic[0]} \nPhone number:' \
+               f'{self.phone}'
+
 
 class Order:
-    def cus_sum(self, c):
-        k = f'Customer: {c.surname} {c.name[0]}.{c.patronymic[0]}.\nPhone number: {c.phone}'
-        return k
+    def __init__(self, customer, *args):
+        self.customer = customer
+        self.product = args
 
-    def total_price(self, prodlist):
+    def total_price(self):
         k = 0
-        for x in prodlist:
+        for x in self.product:
             k += x.price
         return k
 
-    def print_list(self, prodl):
+    def add_prod(self, a):
+        self.product += (a,)
+
+    def del_prod(self, b):
+        for a, x in enumerate(self.product):
+            if b == x:
+                self.product = self.product[:a] + self.product[a+1:]
+
+    def __str__(self):
         k = ''
-        for x in prodl:
-            k += f'{x.price} {x.description} {x.dimension}\n'
-        return k
+        for x in self.product:
+            k += x.__str__()
+        return f'{self.customer}\n{k}'
 
 
-cus = Customer('Anna', 'Lin', 'Hryhorivna', '0989823767')
-prod3 = []
-prod3.append(Product(10, 'a', '10'))
-prod3.append(Product(13, 'b', '12'))
-prod3.append(Product(11, 'c', '15'))
-ord1 = Order()
-print(f'{ord1.cus_sum(cus)}\nProducts(price, description, dimension);\n{ord1.print_list(prod3)}'
-      f'Total: {ord1.total_price(prod3)}')
+cus = Customer('Hanna', 'Grych', 'Hryhorivna', '0989823767')
+prod1 = (Product(10, 'a', '10'))
+prod2 = (Product(13, 'b', '12'))
+prod3 = (Product(11, 'c', '15'))
+ord1 = Order(cus, prod1, prod2, prod3)
+print(ord1.total_price())
+ord1.add_prod(prod1)
+print(ord1.total_price())
+ord1.del_prod(prod2)
+print(ord1.total_price())
+print(ord1.__str__())
