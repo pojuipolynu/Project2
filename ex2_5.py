@@ -4,34 +4,32 @@ class Student:
         self.surname = surname
         self.rbn = rbn
         self.grades = grades
-        self.average = 0
+
+    def high_grade(self):
+        return round(sum(self.grades)/len(self.grades), 2)
 
     def __str__(self):
-        return f'Student: {self.surname} {self.name[0]}\nRecord book number: {self.rbn}\nGrades: {self.grades} '
+        return f'Student: {self.surname} {self.name[0]}\nRecord book number: {self.rbn}\nGrades: {self.grades}' \
+               f'Average score: {self.high_grade()} '
 
 
 class Group:
-    def __init__(self):
+    def __init__(self, studmax=20):
         self.student = []
+        self.studmax = studmax
 
     def add_stud(self, a):
         if not isinstance(a, Student) or a in self.student:
             raise Exception('Given information is invalid')
-        elif len(self.student) > 20:
+        elif len(self.student) > self.studmax:
             raise Exception('Group can contain no more than twenty students')
         else:
             self.student.append(a)
         return self.student
 
-    def high_grade(self):
-        for x in self.student:
-            x.average = round(sum(x.grades)/len(x.grades), 2)
-        self.student.sort(key=lambda a: a.average, reverse=True)
+    def highest_grade(self):
+        self.student.sort(key=lambda a: a.high_grade(), reverse=True)
         return self.student[:5]
-
-    def print_score(self):
-        for x in self.high_grade():
-            print(x, '\nAverage score:', x.average, '\n')
 
 
 student1 = Student('Yulia', 'Ponomareva', '3905798684', (2, 4, 6, 1, 34, 6))
@@ -47,4 +45,4 @@ group.add_stud(student3)
 group.add_stud(student4)
 group.add_stud(student5)
 group.add_stud(student6)
-print(group.print_score())
+print("\n".join(map(str, group.highest_grade())))
